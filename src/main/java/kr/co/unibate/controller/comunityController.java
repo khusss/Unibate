@@ -47,6 +47,14 @@ public class comunityController {
 	PageNumberingManager pageNumberingManager = PageNumberingManager.getInstance();
 	
 	//메인 패이지 입니다.
+	
+	@RequestMapping(value="/", method=RequestMethod.GET)
+	public String rootpage(Model model){
+
+		
+		return "main";
+	}
+	
 	@RequestMapping(value="/main.do", method=RequestMethod.GET)
 	public String pagename(Model model){
 

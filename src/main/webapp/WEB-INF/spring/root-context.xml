@@ -25,9 +25,9 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="dataSource"  class="org.springframework.jdbc.datasource.DriverManagerDataSource" lazy-init="false">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/javadb" />
-        <property name="username" value="javauser" />
-        <property name="password" value="1234" />
+        <property name="url" value="jdbc:mysql://localhost:3306/khusss?characterEncoding=UTF8"/>
+        <property name="username" value="khusss" />
+        <property name="password" value="unibate@0731" />
 	</bean>
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -51,5 +51,7 @@
 
 	
 	<bean id="boardService" class="kr.co.unibate.Service.ComunityService" />
+
+	
 	
 </beans>

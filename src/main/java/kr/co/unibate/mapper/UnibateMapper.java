@@ -41,8 +41,9 @@ public interface UnibateMapper {
 	
 	//대회정보
 	final String COMPETITIONINFO_LOAD="SELECT * FROM CompetitionInfo";
-	final String COMPETITIONINFO_INSERT="INSERT INTO CompetitionInfo(competition_date, competition_name, competition_local, competition_url) "+" VALUES(#{competition_date},#{competition_name},#{competition_local},#{competition_url})";
-	final String COMPETITIONINFO_DELETE="delete from CompetitionInfo where info_code in (SELECT * FROM(select info_code from CompetitionInfo where competition_date < now()) a)";
+	final String COMPETITIONINFO_INSERT="INSERT INTO CompetitionInfo(competition_date, competition_name, competition_local, competition_url) VALUES(#{competition_date},#{competition_name},#{competition_local},#{competition_url})";
+	final String COMPETITIONINFO_DELETE="delete from CompetitionInfo where info_code in "
+			+ " (SELECT * FROM(select info_code from CompetitionInfo where competition_date < now()) a)";
 	final String COMPETITIONINFO_CHK="SELECT COUNT(*) FROM CompetitionInfo";
 	
 	@Select(COMPETITIONINFO_CHK)
@@ -167,7 +168,7 @@ public interface UnibateMapper {
 	void deleteSuggestion(@Param("suggestion_board_num") int suggestion_board_num);
 	
 	//신고함 파트 입니다.
-	final String PROPOSAL_INSERT="INSERT INTO PROPOSAL(proposal_flag, proposal_subject, proposal_content, id, proposal_date ) VALUES( #{proposal_flag}, #{proposal_subject}, #{proposal_content}, #{id}, sysdate())";
+	final String PROPOSAL_INSERT="INSERT INTO proposal(proposal_flag, proposal_subject, proposal_content, id, proposal_date ) VALUES( #{proposal_flag}, #{proposal_subject}, #{proposal_content}, #{id}, sysdate())";
 	
 	@Insert(PROPOSAL_INSERT)
 	void reportered_data(Proposal proposal);
@@ -176,14 +177,14 @@ public interface UnibateMapper {
 	
 	//자유게시판
 	
-	final String FBOARD_INSERT="INSERT INTO FBoard(FBoard_content, FBoard_subject, FBoard_hit , id, FBoard_date ,URLdata) VALUES( #{fboard_content}, #{fboard_subject}, 0, #{id}, now(), #{urldata})";
-	final String FBOARD_PAGING="SELECT * FROM FBoard ORDER BY  fboard_num DESC LIMIT  #{start}, #{end} ";
-	final String FBOARD_ALL="SELECT COUNT(1) FROM fboard";
-	final String FBOARD_HITS_UP="UPDATE fboard SET fboard_hit=fboard_hit+1 WHERE  fboard_num=#{fboard_num}";
-	final String FBOARD_DATA="SELECT * FROM fboard WHERE fboard_num=#{fboard_num}";
-	final String FBOARD_DELETE="DELETE FROM fboard WHERE fboard_num=#{fboard_num}";
-	final String FBOARD_LIKE="UPDATE fboard SET f_like=f_like+1 WHERE fboard_num=#{fboard_num}";
-	final String FBOARD_DLIKE="UPDATE fboard SET f_dislike=f_dislike+1 WHERE fboard_num=#{fboard_num}";
+	final String FBOARD_INSERT="INSERT INTO fBoard(FBoard_content, FBoard_subject, FBoard_hit , id, FBoard_date ,URLdata) VALUES( #{fboard_content}, #{fboard_subject}, 0, #{id}, now(), #{urldata})";
+	final String FBOARD_PAGING="SELECT * FROM fBoard ORDER BY  fboard_num DESC LIMIT  #{start}, #{end} ";
+	final String FBOARD_ALL="SELECT COUNT(1) FROM fBoard";
+	final String FBOARD_HITS_UP="UPDATE fBoard SET fboard_hit=fboard_hit+1 WHERE  fboard_num=#{fboard_num}";
+	final String FBOARD_DATA="SELECT * FROM fBoard WHERE fboard_num=#{fboard_num}";
+	final String FBOARD_DELETE="DELETE FROM fBoard WHERE fboard_num=#{fboard_num}";
+	final String FBOARD_LIKE="UPDATE fBoard SET f_like=f_like+1 WHERE fboard_num=#{fboard_num}";
+	final String FBOARD_DLIKE="UPDATE fBoard SET f_dislike=f_dislike+1 WHERE fboard_num=#{fboard_num}";
 	
 	//좋아요 체크
 	
@@ -296,21 +297,21 @@ public interface UnibateMapper {
 	final String CLUB_INSERT="INSERT INTO club(club_name, club_introduce_text, id, club_img, club_make_date) VALUES(#{club_name}, #{club_introduce_text}, #{id}, #{club_img}, now())";
 	final String CLUB_OVERLAP="SELECT COUNT(*) FROM club WHERE id LIKE #{id} ";
 	final String CLUB_NAME_CHECK="SELECT COUNT(*) FROM club WHERE club_name LIKE #{club_name}";
-	final String CLUB_MAKE_USER="SELECT club_name, id, club_num FROM CLUB WHERE id LIKE #{id}";
+	final String CLUB_MAKE_USER="SELECT club_name, id, club_num FROM club WHERE id LIKE #{id}";
 	final String CLUB_PRIME_IN="INSERT INTO club_mem(club_flag, id, club_num) VALUES(1 , #{id},  #{club_num})";
 	final String CLUB_MEM_IN="INSERT INTO club_mem(club_flag, id, club_num) VALUES(3, #{id},  #{club_num})";
 	final String CLUB_JOIN_CHECK="select COUNT(*) from club_mem where id like #{id}";
-	final String CLUB_MEM_UP="UPDATE CLUB SET club_mem=(SELECT COUNT(*) FROM CLUB_MEM WHERE CLUB_NUM=#{club_num}) where club_num=#{club_num}";
+	final String CLUB_MEM_UP="UPDATE club SET club_mem=(SELECT COUNT(*) FROM club_mem WHERE CLUB_NUM=#{club_num}) where club_num=#{club_num}";
 	
-	final String CLUB_NUM="SELECT CLUB_NUM FROM CLUB WHERE CLUB_NAME LIKE #{CLUB_NAME}";
+	final String CLUB_NUM="SELECT CLUB_NUM FROM club WHERE CLUB_NAME LIKE #{CLUB_NAME}";
 	
-	final String CLUB_ALL_VIEW="SELECT club_make_date, club_name, club_mem FROM CLUB";
-	final String CLUB_ALL="SELECT COUNT(*) FROM CLUB";
+	final String CLUB_ALL_VIEW="SELECT club_make_date, club_name, club_mem FROM club";
+	final String CLUB_ALL="SELECT COUNT(*) FROM club";
 	
-	final String CLUB_MEM_INFO="SELECT COUNT(*) FROM CLUB_MEM GROUP BY club_num HAVING club_num=#{club_num}";
+	final String CLUB_MEM_INFO="SELECT COUNT(*) FROM club_mem GROUP BY club_num HAVING club_num=#{club_num}";
 	final String CLUB_MEM_NUM_UP="UPDATE club SET club_mem=#{club_mem} WHERE club_num=#{club_num}";
 	
-	final String MEM_CLUB_NUM_UP="UPDATE MEMBER1 set CLUB_NUM=(SELECT club_num FROM CLUB_MEM WHERE id LIKE #{id} ) where id=#{id}";
+	final String MEM_CLUB_NUM_UP="UPDATE MEMBER1 set CLUB_NUM=(SELECT club_num FROM club_mem WHERE id LIKE #{id} ) where id=#{id}";
 	
 	
 	@Insert(CLUB_INSERT)
@@ -440,7 +441,7 @@ public interface UnibateMapper {
 	final String My_Club_Num = "select club_num from MEMBER1 where id=#{id}";
 	final String My_Club_Info = "SELECT * from club where club_num=#{club_num}";
 	
-	final String APPOINTMENT_MANAGER="UPDATE CLUB_MEM set club_flag=#{club_flag} WHERE ID=#{id}";
+	final String APPOINTMENT_MANAGER="UPDATE club_mem set club_flag=#{club_flag} WHERE ID=#{id}";
 
 	@Update(APPOINTMENT_MANAGER)
 	void appointmentManager(ClubData clubData);
@@ -448,9 +449,9 @@ public interface UnibateMapper {
 	//내동아리 인원수
 	final String My_Club_Member = "SELECT count(*) from MEMBER1 where club_num=#{my_club_num}";
 	//내 동아리 멤버들 가져오기
-	final String My_Club_Member_List = "select * from (SELECT m.id, m.name, c.club_flag, m.club_num from MEMBER1 as M INNER JOIN CLUB_mem as c where m.id=c.id order by club_num) as d where d.club_num=#{club_num}";
+	final String My_Club_Member_List = "select * from (SELECT m.id, m.name, c.club_flag, m.club_num from MEMBER1 as m INNER JOIN club_mem as c where m.id=c.id order by club_num) as d where d.club_num=#{club_num}";
 	//클럽장 가져오기
-	final String My_Club_King = "SELECT id FROM CLUB_MEM where CLUB_NUM=#{club_num} and club_flag=1";
+	final String My_Club_King = "SELECT id FROM club_mem where CLUB_NUM=#{club_num} and club_flag=1";
 	
 
 	@Select(It_Board_Count)
@@ -587,8 +588,8 @@ public interface UnibateMapper {
 	
 	
 	//동아리 탈퇴
-	final String MY_CLUB_FLAG="SELECT CLUB_FLAG FROM CLUB_MEM WHERE ID=#{id}";
-	final String SECESSION_CLUB="DELETE FROM CLUB_MEM WHERE ID=#{id}";
+	final String MY_CLUB_FLAG="SELECT CLUB_FLAG FROM club_mem WHERE ID=#{id}";
+	final String SECESSION_CLUB="DELETE FROM club_mem WHERE ID=#{id}";
 	final String CLUB_NUM_0="UPDATE MEMBER1 SET CLUB_NUM=0 WHERE ID=#{id}";
 	
 	@Select(MY_CLUB_FLAG)
@@ -605,11 +606,11 @@ public interface UnibateMapper {
 	final String SIGN_IN = "INSERT INTO MEMBER1(id,pwd,name,gender,area,school,major,email) VALUES(#{id},#{pwd},#{name},#{gender},#{area},#{school},#{major},#{email})";
 
 
-	final String CALL_INFO="SELECT EMAIL,NAME,CLUB_NUM FROM member1 WHERE ID=#{id}";
+	final String CALL_INFO="SELECT EMAIL,NAME,CLUB_NUM FROM MEMBER1 WHERE ID=#{id}";
 	final String INFO_MODIFY="UPDATE MEMBER1 SET pwd=#{pwd},school=#{school},major=#{major},area=#{area} where id=#{id}";
 
-	final String Login = "SELECT pwd FROM member1 WHERE id=#{id} ";
-	final String Id_Check = "SELECT id FROM member1 WHERE id=#{id}";
+	final String Login = "SELECT pwd FROM MEMBER1 WHERE id=#{id} ";
+	final String Id_Check = "SELECT id FROM MEMBER1 WHERE id=#{id}";
 	/////////////////////////////////////////////////////////////////
 	
 	final String CLUB_NUM_= "SELECT club_num FROM MEMBER1 WHERE ID LIKE #{id}";
@@ -652,8 +653,8 @@ public interface UnibateMapper {
 	@Update(INFO_MODIFY)
 	void infoModify(User user);
 	
-	final String Find_Id = "SELECT id FROM member1 WHERE email=#{email} and name=#{name}";
-	final String Find_Pwd="SELECT pwd FROM member1 WHERE id like #{id} and email like #{email} and name like #{name}";
+	final String Find_Id = "SELECT id FROM MEMBER1 WHERE email=#{email} and name=#{name}";
+	final String Find_Pwd="SELECT pwd FROM MEMBER1 WHERE id like #{id} and email like #{email} and name like #{name}";
 
 	@Select(Find_Id)
 	String find_id(@Param("email") String email,@Param("name")String name);
@@ -695,10 +696,10 @@ public interface UnibateMapper {
 	final String Insert_Op = "INSERT INTO rt_opinion(group_num,d_num,id,d_opinion,opinion_date) values(#{group_num},#{d_num},#{id},#{d_opinion},now())";
 	
 	//찬성팀 리스트 가져오기
-	final String Real_Agree_Member = "select b.id,b.name,sum(a.opinion_num) as opinion_num from rt_opinion as a join member1 as b on a.id=b.id where a.d_num=#{d_num} and a.group_num =1 group by a.id";
+	final String Real_Agree_Member = "select b.id,b.name,sum(a.opinion_num) as opinion_num from rt_opinion as a join MEMBER1 as b on a.id=b.id where a.d_num=#{d_num} and a.group_num =1 group by a.id";
 	
 	//반대팀 리스트 가져오기
-	final String Real_Disagree_Member = "select b.id,b.name,sum(a.opinion_num) as opinion_num from rt_opinion as a join member1 as b on a.id=b.id where a.d_num=#{d_num} and a.group_num =2 group by a.id";
+	final String Real_Disagree_Member = "select b.id,b.name,sum(a.opinion_num) as opinion_num from rt_opinion as a join MEMBER1 as b on a.id=b.id where a.d_num=#{d_num} and a.group_num =2 group by a.id";
 	
 	//팀 취소 하기 
 	final String Real_Team_Cancel = "delete from rt_opinion where d_num=#{d_num} and group_num=#{my_group_num} and id=#{id}";
@@ -864,7 +865,7 @@ public interface UnibateMapper {
 	@Select(GET_MEMBER_ALL)
 	ArrayList<User> getMemberAll(); 
 	
-	final String CLUB_ALL_DATA="SELECT * FROM CLUB";
+	final String CLUB_ALL_DATA="SELECT * FROM club";
 	
 	@Select(CLUB_ALL_DATA)
 	ArrayList<ClubData> getClubAllData();
@@ -875,7 +876,7 @@ public interface UnibateMapper {
 	void deleteMember(String id);
 	
 	final String CLUB_MEM_RESET="UPDATE MEMBER1 SET CLUB_NUM=0 WHERE CLUB_NUM=#{club_num}";
-	final String CLUB_MEM_DEL="DELETE FROM CLUB_MEM WHERE CLUB_NUM=#{club_num} ";
+	final String CLUB_MEM_DEL="DELETE FROM club_mem WHERE CLUB_NUM=#{club_num} ";
 	final String CLUB_DEL="DELETE FROM CLUB WHERE CLUB_NUM=#{club_num}";
 	
 	@Update(CLUB_MEM_RESET)
@@ -929,7 +930,7 @@ public interface UnibateMapper {
 	String Get_Best_Mem_Id(@Param("d_num") String d_num);
 	
 	//최다 멤버 학교 구하기
-	final String Get_Mem_School = "select school from member1 where id =#{id}";
+	final String Get_Mem_School = "select school from MEMBER1 where id =#{id}";
 	@Select(Get_Mem_School)
 	String Get_Mem_School(@Param("id") String id);
 	

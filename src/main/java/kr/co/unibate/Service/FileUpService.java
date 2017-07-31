@@ -15,7 +15,9 @@ public class FileUpService {
 	
 	public static String fileUpload(MultipartHttpServletRequest mRequest, String path) {
 		String saveFileName="";
-		String uploadPath = "D:/JavaProject/mywork_spring/unibateProject/src/main/webapp"+path;
+		//String uploadPath = "D:/JavaProject/mywork_spring/unibateProject/src/main/webapp"+path;
+		String uploadPath = mRequest.getSession().getServletContext().getRealPath(path);
+		
 		System.out.println();
 		
 		File dir = new File(uploadPath);

@@ -298,7 +298,6 @@ function cheer_up(id){
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="main.do">Home</a></li>
                         <li class="dropdown active">
                             <a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">토론대전<b class=" icon-angle-down"></b></a>
                             <ul class="dropdown-menu">

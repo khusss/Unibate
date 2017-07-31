@@ -47,7 +47,6 @@ public class comunityController {
 	PageNumberingManager pageNumberingManager = PageNumberingManager.getInstance();
 	
 	//메인 패이지 입니다.
-	
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String rootpage(Model model){
 
@@ -73,8 +72,6 @@ public class comunityController {
 		competitionInfo=comunityService.getCompInfo();
 		
 		int counter = competitionInfo.size();
-		
-		System.out.println(counter);
 		
 		model.addAttribute("comp", competitionInfo);
 		model.addAttribute("counter", counter);
@@ -104,23 +101,14 @@ public class comunityController {
 		
 		start = (pNum-1)*end;
 		
-		System.out.println("start : "+start);
-		System.out.println("end"+end);
 		
 		noticeBoard = comunityService.getNoticeBoard(start, end);
-	
-		
-		System.out.println(allNotice);
 		
 		int pageCount = pageNumberingManager.getTotalPage(allNotice, 15);
 		int pageBlock = pageNumberingManager.getPageBlock(pNum, 10);
 		int pageBStart = pageNumberingManager.getFirstpageInBlock(pageBlock, 10);
 		int pageBEnd = pageNumberingManager.getLastPageInBlock(pageBlock, 10);
 		
-		System.out.println("pageCount : "+pageCount);
-		System.out.println("pageBlock : "+pageBlock);
-		System.out.println("pageBStart : "+pageBStart);
-		System.out.println("pageBEnd : "+pageBEnd);
 		
 		model.addAttribute("nboard", noticeBoard);
 		model.addAttribute("allNotice", allNotice);
@@ -168,7 +156,6 @@ public class comunityController {
 	@RequestMapping(value="/reported_com.do", method=RequestMethod.GET)
 	public String reported_com(Proposal proposal,
 											Model model){
-		System.out.println(proposal.getId());
 		comunityService.reportered_data(proposal);
 		
 		return "redirect:/reported.do";
@@ -193,23 +180,12 @@ public class comunityController {
 		
 		start = (pNum-1)*end;
 		
-		System.out.println("start : "+start);
-		System.out.println("end"+end);
-		
 		suggstionBoard = comunityService.getSuggestionBoard(start, end);
-	
-		
-		System.out.println(allSuggestion);
 		
 		int pageCount = pageNumberingManager.getTotalPage(allSuggestion, 15);
 		int pageBlock = pageNumberingManager.getPageBlock(pNum, 10);
 		int pageBStart = pageNumberingManager.getFirstpageInBlock(pageBlock, 10);
 		int pageBEnd = pageNumberingManager.getLastPageInBlock(pageBlock, 10);
-		
-		System.out.println("pageCount : "+pageCount);
-		System.out.println("pageBlock : "+pageBlock);
-		System.out.println("pageBStart : "+pageBStart);
-		System.out.println("pageBEnd : "+pageBEnd);
 		
 		model.addAttribute("sboard", suggstionBoard);
 		model.addAttribute("allSuggestion", allSuggestion);
@@ -374,23 +350,12 @@ public class comunityController {
 		
 		start = (pNum-1)*end;
 		
-		System.out.println("start : "+start);
-		System.out.println("end"+end);
-		
 		fBoard = comunityService.getFBoardList(start, end);
-		
-		
-		System.out.println(allfboard);
 		
 		int pageCount = pageNumberingManager.getTotalPage(allfboard, 15);
 		int pageBlock = pageNumberingManager.getPageBlock(pNum, 10);
 		int pageBStart = pageNumberingManager.getFirstpageInBlock(pageBlock, 10);
 		int pageBEnd = pageNumberingManager.getLastPageInBlock(pageBlock, 10);
-		
-		System.out.println("pageCount : "+pageCount);
-		System.out.println("pageBlock : "+pageBlock);
-		System.out.println("pageBStart : "+pageBStart);
-		System.out.println("pageBEnd : "+pageBEnd);
 		
 		model.addAttribute("fboard", fBoard);
 		model.addAttribute("allfboard", allfboard);
@@ -425,11 +390,8 @@ public class comunityController {
 								Model model){
 		
 		String id = (String)session.getAttribute("userid");
-		System.out.println(id);
-		System.out.println(fboard_num);
 		int f_num=Integer.parseInt(fboard_num);
 		int result;
-		System.out.println(f_num);
 		
 		FboardLikeCheck fboardLikeCheck=new FboardLikeCheck();
 		
@@ -455,11 +417,8 @@ public class comunityController {
 								Model model){
 		
 		String id = (String)session.getAttribute("userid");
-		System.out.println(id);
-		System.out.println(fboard_num);
 		int f_num=Integer.parseInt(fboard_num);
 	
-		System.out.println(f_num);
 		int r_num=Integer.parseInt(f_reply_num);
 	
 		FboardReplyCheck fboardReplyCheck=new FboardReplyCheck();
@@ -496,15 +455,11 @@ public class comunityController {
 		String URL="";
 		while (tokens.hasMoreElements()) {
 			URL=tokens.nextToken();
-			 System.out.println("temp="+URL);
 		}
 		
-		System.out.println(URL);
 		
 		if(URL.indexOf("=") > -1){
-			System.out.println(URL.indexOf("="));
 			URL=URL.substring(URL.indexOf("=")+1);
-			System.out.println(URL);
 		}
 		
 		
@@ -527,7 +482,6 @@ public class comunityController {
 		String id = (String)session.getAttribute("userid");
 		
 		int f_num = Integer.parseInt(fboard_num);
-		System.out.println(id);
 		this.comunityService.fBoardHitsup(f_num);
 		FboardLikeCheck fboardLikeCheck=new FboardLikeCheck();
 		
@@ -690,23 +644,12 @@ public class comunityController {
 		
 		start = (pNum-1)*end;
 		
-		System.out.println("start : "+start);
-		System.out.println("end"+end);
-		
 		qnAboards = comunityService.getQNABoard(start, end);
-	
-		
-		System.out.println(allQNA);
 		
 		int pageCount = pageNumberingManager.getTotalPage(allQNA, 15);
 		int pageBlock = pageNumberingManager.getPageBlock(pNum, 10);
 		int pageBStart = pageNumberingManager.getFirstpageInBlock(pageBlock, 10);
 		int pageBEnd = pageNumberingManager.getLastPageInBlock(pageBlock, 10);
-		
-		System.out.println("pageCount : "+pageCount);
-		System.out.println("pageBlock : "+pageBlock);
-		System.out.println("pageBStart : "+pageBStart);
-		System.out.println("pageBEnd : "+pageBEnd);
 		
 		model.addAttribute("qboard", qnAboards);
 		model.addAttribute("allQNA", allQNA);

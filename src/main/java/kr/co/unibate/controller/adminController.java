@@ -107,7 +107,6 @@ public class adminController {
 	@RequestMapping(value="/memdeletechk.do",method={RequestMethod.GET,RequestMethod.POST})
 	public String memdelete(HttpServletRequest request,Model model){
 		String id =request.getParameter("userid");
-		System.out.println(id);
 		this.loginService.deleteMember(id);
 		return "redirect:/memberReg_chk.do?option=mem";
 	}
@@ -115,7 +114,6 @@ public class adminController {
 	@RequestMapping(value="/clubdeletechk.do",method={RequestMethod.GET,RequestMethod.POST})
 	public String clubdeletechk(HttpServletRequest request,Model model){
 		String club_num =request.getParameter("club_num");
-		System.out.println(club_num);
 		this.loginService.clubmemReset(club_num);
 		this.loginService.clubMemDel(club_num);
 		this.loginService.clubDel(club_num);
@@ -135,21 +133,12 @@ public class adminController {
 		
 		start = (pNum-1)*end;
 		
-		
 		noticeBoard = comunityService.getNoticeBoard(start, end);
-	
-		
-		System.out.println(allNotice);
 		
 		int pageCount = pageNumberingManager.getTotalPage(allNotice, 15);
 		int pageBlock = pageNumberingManager.getPageBlock(pNum, 10);
 		int pageBStart = pageNumberingManager.getFirstpageInBlock(pageBlock, 10);
 		int pageBEnd = pageNumberingManager.getLastPageInBlock(pageBlock, 10);
-		
-		System.out.println("pageCount : "+pageCount);
-		System.out.println("pageBlock : "+pageBlock);
-		System.out.println("pageBStart : "+pageBStart);
-		System.out.println("pageBEnd : "+pageBEnd);
 		
 		model.addAttribute("nboard", noticeBoard);
 		model.addAttribute("allNotice", allNotice);
@@ -170,8 +159,7 @@ public class adminController {
 	public String insertNotice_ok(@RequestParam("pageNum") String pageNum,
 			@RequestParam("notice_subject") String notice_subject,
 			@RequestParam("notice_content") String notice_content,Model model){
-		System.out.println(notice_subject+":notice_subject");
-		System.out.println(notice_content+":notice_content");
+		
 		notice_content=notice_content.replaceAll("\r\n", "<br>");
 		this.loginService.insertNotice(notice_subject, notice_content);
 		return "redirect:/noticeReg.do?pageNum=1";
@@ -239,7 +227,6 @@ public class adminController {
 		
 		
 		int max_dnum_debate= realTimeService.Get_Maxdnum_Debate();
-		System.out.println("max_dnum_debate:::"+max_dnum_debate);
 		
 		
 		int max_dnum_result;
@@ -251,14 +238,12 @@ public class adminController {
 			max_dnum_result =0;
 		
 		}
-		System.out.println("max_dnum_result::"+max_dnum_result);
 		
 		if(max_dnum_debate>max_dnum_result){
 			
 		for(int i = max_dnum_result+1 ; i <= max_dnum_debate ; i++){
 			String d_num = toString().valueOf(i);
 			RTDebate rtdbate=realTimeService.Get_Rt_subj(d_num);
-			System.out.println("dnum"+d_num);
 			int agree_score = 0;
 			int disagree_score = 0;
 			
@@ -292,7 +277,6 @@ public class adminController {
 			SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
 			Calendar cal = Calendar.getInstance();
 			String today = null;
-			System.out.println(rtdbate.getD_date());
 			cal.setTime(rtdbate.getD_date());
 			cal.add(Calendar.DATE, 30);
 			today = formatter.format(cal.getTime());
@@ -306,11 +290,6 @@ public class adminController {
 				String mem_school = "일반";
 				model.addAttribute("mem_school", mem_school);
 			}
-			
-			
-			
-			
-			
 			
 			realTimeService.Insert_Rt_Result(d_num, rtdbate.getD_subject(),
 					best_mem, ag_score, disag_score, rtdbate.getD_date().toString(), end_date.toString());

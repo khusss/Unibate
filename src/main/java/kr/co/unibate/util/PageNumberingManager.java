@@ -14,7 +14,7 @@ public class PageNumberingManager {
 	*/
 	private static final PageNumberingManager pageNumberingManager=new PageNumberingManager();
 	
-	private static final Logger logger=LoggerFactory.getLogger(PageNumberingManager.class);
+	//private static final Logger logger=LoggerFactory.getLogger(PageNumberingManager.class);
 	
 	private PageNumberingManager() {}
 	
@@ -24,7 +24,7 @@ public class PageNumberingManager {
 	
 	public int getTotalPage(int total_cnt, int rowsPerPage){
 		
-		logger.info("getTotalPage Called!!!");
+		//logger.info("getTotalPage Called!!!");
 		
 		int total_pages=0;
 		if((total_cnt%rowsPerPage)==0){
@@ -33,7 +33,7 @@ public class PageNumberingManager {
 			total_pages=total_cnt/rowsPerPage+1;
 		}
 		
-		logger.info("getTotalPage return total_pages="+total_pages);
+		//logger.info("getTotalPage return total_pages="+total_pages);
 		
 		return total_pages;
 	}

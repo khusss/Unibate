@@ -82,7 +82,6 @@ public class mypageController {
 			,Model model){
 		
 		String id = (String)session.getAttribute("userid");
-		System.out.println(id);
 		User user=this.loginService.callInfo(id);
 		model.addAttribute("user",user);
 		return "/mypage/infomodify";	
@@ -175,7 +174,6 @@ public class mypageController {
 			Model model){
 		String myid = (String)session.getAttribute("userid");
 		String my_club_num = boardService.My_Club_Num(myid);
-		System.out.println(my_club_num);
 		ClubData my_club = boardService.My_Club_Info(my_club_num);
 		
 		ArrayList<User> my_club_member_list = boardService.My_Club_Member_List(my_club_num);
@@ -230,17 +228,13 @@ public class mypageController {
 		
 		String id = (String)session.getAttribute("userid");
 		int c_num=Integer.parseInt(club_num);
-		System.out.println("id = "+id);
-		System.out.println(c_num);
 		
 		if(c_num != 0){
 			this.clubService.secessionClub(id);
 			this.clubService.clubNumReset(id);
 			this.clubService.clubMemUp(c_num);
 			this.clubService.deleteMem(id);
-			System.out.println("1. c_num : "+c_num);
 		}else{
-			System.out.println("2. c_num : "+c_num);
 			this.clubService.deleteMem(id);
 		}
 		redirectAttr.addFlashAttribute("userDel","탈퇴 하셨습니다.");

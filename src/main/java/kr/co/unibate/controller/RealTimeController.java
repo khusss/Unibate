@@ -40,7 +40,6 @@ public class RealTimeController {
 		String myid = (String)sessid.getAttribute("userid");
 
 		String my_group_num = realTimeService.My_Group_Num(myid);
-		System.out.println("my_group_num :"+my_group_num);
 		
 		if(my_group_num==null){
 			my_group_num="3";
@@ -134,8 +133,6 @@ public class RealTimeController {
 			return "/realTimeDebate/IdCheck";
 			}
 		}
-		System.out.println("여기까지는 옴");
-		
 		realTimeService.Agree_Team(d_num, myid);
 		
 
@@ -173,15 +170,11 @@ public class RealTimeController {
 	@RequestMapping(value="/insert_op.do",method={RequestMethod.GET,RequestMethod.POST})
 	 public String insert_op(Model model,HttpServletRequest request,@RequestParam("d_opinion") String d_opinion){
 		
-		System.out.println("::::"+d_opinion);
 		int debate_num=this.realTimeService.getCurrentRDebate();
 		String d_num=Integer.toString(debate_num);
 		HttpSession session = request.getSession() ;
 		String myid = (String)session.getAttribute("userid");
 		int check = realTimeService.Real_Team_Check(myid);
-		
-		System.out.println(myid);
-		
 		String my_group_num = realTimeService.My_Group_Num(myid);
 		if(my_group_num == null){
 			my_group_num = "3";
@@ -218,7 +211,6 @@ public class RealTimeController {
 		Calendar oCalendar = Calendar.getInstance();
 		int tmp = oCalendar.get(Calendar.DAY_OF_MONTH);
 		String _date2 = String.valueOf(tmp);
-		System.out.println(id);
 		
 		int debate_num=this.realTimeService.getCurrentRDebate();
 		String d_num=Integer.toString(debate_num);
@@ -238,28 +230,20 @@ public class RealTimeController {
 			}
 
 			TempLike tmp_date = realTimeService.Get_Temp_Date();
-			System.out.println("tmp_date : " + tmp_date.getTmp_date().toString());
 			String _date = tmp_date.getTmp_date().toString().substring(8, 10);
-			System.out.println(_date);
-
+			
 			if (_date.equals(_date2)) {
-				System.out.println("삭제 전전전전");
 			} else {
 				realTimeService.Del_Temp_Like();
-				System.out.println("삭제 후후훟후");
 			}
 		}else{
 			TempLike tmp_date = realTimeService.Get_Temp_Date();
 			String _date = tmp_date.getTmp_date().toString().substring(8,10);
-			System.out.println(_date);
 			
 			if(_date.equals(_date2)){
-					System.out.println("삭제 전전전전");
 			}else{
 				realTimeService.Del_Temp_Like();
-				System.out.println("삭제 후후훟후");
 			}
-
 			String my_group_num = realTimeService.My_Group_Num(id);
 			int check = realTimeService.Check_Temp_Like(myid);
 			

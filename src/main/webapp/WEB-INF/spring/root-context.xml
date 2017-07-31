@@ -17,15 +17,11 @@
         <property name="maxUploadSize" value="100000000"/>
         <property name="maxInMemorySize" value="100000000"/>
     </bean>
-
-	<bean id="uploadPath" class="java.lang.String">
-    	<constructor-arg value="D:/JavaProject/mywork_spring/unibateProject/src/main/webapp/data"/>
-	</bean>
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="dataSource"  class="org.springframework.jdbc.datasource.DriverManagerDataSource" lazy-init="false">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/khusss?characterEncoding=UTF8"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/khusss?useUnicode=true&amp;characterEncoding=utf8" />
         <property name="username" value="khusss" />
         <property name="password" value="unibate@0731" />
 	</bean>
@@ -51,7 +47,5 @@
 
 	
 	<bean id="boardService" class="kr.co.unibate.Service.ComunityService" />
-
-	
 	
 </beans>

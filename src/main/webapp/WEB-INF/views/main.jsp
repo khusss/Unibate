@@ -41,7 +41,6 @@
                 </div>
                 <div class="navbar-collapse collapse ">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="main.do">Home</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">토론대전<b class=" icon-angle-down"></b></a>
                             <ul class="dropdown-menu">
@@ -101,7 +100,7 @@
                         	<a href="login.do">로그인</a>
                         </li>
                        	</c:if>
-                        <c:if test="${!empty sessionScope.userid}">
+                        <c:if test="${!empty sessionScope.userid }">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">마이페이지<b class=" icon-angle-down"></b></a>
                             <ul class="dropdown-menu">
@@ -113,6 +112,11 @@
 								<li><a href="logout.do">로그아웃</a></li>
                             </ul>
                         </li>
+                        </c:if>
+                        <c:if test="${!empty sessionScope.userid && sessionScope.userid eq 'administer'}">
+                        	<li>
+                        		<a href="admain.do">관리페이지</a>
+  							 </li>
                         </c:if>
                         <!-- 회원가입 패이지는 singup.do -->
                     </ul>

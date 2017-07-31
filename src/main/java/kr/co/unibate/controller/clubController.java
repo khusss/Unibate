@@ -69,8 +69,6 @@ public class clubController {
 		String c_name =request.getParameter("club_name");
 		
 		int result = this.clubService.clubNameCheck(c_name);
-		System.out.println("11111111");
-		System.out.println(c_name);
 		String json="{\"result\":\""+result+"\"}";
 		
 		model.addAttribute("json",json);
@@ -111,7 +109,6 @@ public class clubController {
 			
 			this.clubService.insertClub(clubData);
 			clubData = this.clubService.clubMakeUser(c_id);
-			System.out.println(clubData.getClub_num());
 			this.clubService.insertCMemDB(clubData);
 			this.clubService.upMemberClub(c_id);
 			redirectAttr.addAttribute("pageNum", "1");
@@ -140,24 +137,12 @@ public class clubController {
 		
 		start = (pNum-1)*end;
 		
-		System.out.println("start : "+start);
-		System.out.println("end"+end);
-		
 		clubBoard = this.clubService.getClubBoard(start, end);
-	
-		
-		System.out.println(allClub);
 		
 		int pageCount = pageNumberingManager.getTotalPage(allClub, 15);
 		int pageBlock = pageNumberingManager.getPageBlock(pNum, 10);
 		int pageBStart = pageNumberingManager.getFirstpageInBlock(pageBlock, 10);
 		int pageBEnd = pageNumberingManager.getLastPageInBlock(pageBlock, 10);
-		
-		System.out.println("pageCount : "+pageCount);
-		System.out.println("pageBlock : "+pageBlock);
-		System.out.println("pageBStart : "+pageBStart);
-		System.out.println("pageBEnd : "+pageBEnd);
-		
 		
 		model.addAttribute("cboard", clubBoard);
 		model.addAttribute("allClub", allClub);
@@ -188,24 +173,13 @@ public class clubController {
 		allRecruit = this.clubService.RecruitAll();
 		
 		start = (pNum-1)*end;
-		
-		System.out.println("start : "+start);
-		System.out.println("end"+end);
-		
+
 		recruitingBoard = this.clubService.getRecruitBoard(start, end);
-	
-		
-		System.out.println(allRecruit);
 		
 		int pageCount = pageNumberingManager.getTotalPage(allRecruit, 15);
 		int pageBlock = pageNumberingManager.getPageBlock(pNum, 10);
 		int pageBStart = pageNumberingManager.getFirstpageInBlock(pageBlock, 10);
 		int pageBEnd = pageNumberingManager.getLastPageInBlock(pageBlock, 10);
-		
-		System.out.println("pageCount : "+pageCount);
-		System.out.println("pageBlock : "+pageBlock);
-		System.out.println("pageBStart : "+pageBStart);
-		System.out.println("pageBEnd : "+pageBEnd);
 		
 		model.addAttribute("rBoard", recruitingBoard);
 		model.addAttribute("allRecruit", allRecruit);
@@ -289,13 +263,9 @@ public class clubController {
 			Model model){
 		HttpSession session = request.getSession() ;
 		String c_id = (String)session.getAttribute("userid");
-		System.out.println(c_id);
 		String club_name = request.getParameter("club_name");
-		System.out.println(club_name);
 		int c_num=this.clubService.getClubNum(club_name);
-		System.out.println(c_num);
 		int result=this.clubService.clubJoinCheck(c_id);
-		System.out.println(result);
 		
 		ClubData clubData=new ClubData();
 		

@@ -893,7 +893,11 @@ public interface UnibateMapper {
 	@Insert(INSERT_NOTICE)
 	void insertNotice(@Param("notice_subject") String notice_subject, @Param("notice_content") String notice_content);
 	
+<<<<<<< HEAD
 	final String NOTICE_DELETE="DELETE FROM NoticeBoard WHERE notice_board_num=#{notice_board_num}";
+=======
+	final String NOTICE_DELETE="DELETE FROM NOTICEBOARD WHERE notice_board_num=#{notice_board_num}";
+>>>>>>> b0d034ff761fabb6b9e9e2e067957cd79ab8e3da
 	
 	@Delete(NOTICE_DELETE)
 	void delNoticeBoard(String notice_board_num);

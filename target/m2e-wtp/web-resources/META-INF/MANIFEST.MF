@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: Administrator
 Build-Jdk: 1.8.0_111
+=======
+Built-By: Soldesk
+Build-Jdk: 1.8.0_121
+>>>>>>> b0d034ff761fabb6b9e9e2e067957cd79ab8e3da
 Created-By: Maven Integration for Eclipse
 

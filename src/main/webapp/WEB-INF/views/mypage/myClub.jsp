@@ -164,8 +164,13 @@ alert('${secessionErr}');
                             <a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">토론동아리<b class=" icon-angle-down"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="clubenrollment.do">동아리 등록</a></li>
+<<<<<<< HEAD
                                 <li><a href="clubstatus.do?pageNum=1">동아리 현황</a></li>
 								<li><a href="recruiting.do?pageNum=1">동아리 모집</a></li>
+=======
+                                <li><a href="clubstatus">동아리 현황</a></li>
+								<li><a href="recruiting.do">동아리 모집</a></li>
+>>>>>>> b0d034ff761fabb6b9e9e2e067957cd79ab8e3da
                             </ul>
                         </li>
                          <c:choose>

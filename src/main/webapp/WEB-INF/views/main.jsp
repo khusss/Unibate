@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>UNIBATE - 대학생들의 토론광장</title>
+<title>UNIBATE - 대학생들의 토론광장(BETA)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="" />
 <meta name="author" content="http://bootstraptaste.com" />
@@ -18,12 +18,7 @@
 <!-- Theme skin -->
 <link href="skins/default.css" rel="stylesheet" />
 
-<!-- =======================================================
-    Theme Name: Moderna
-    Theme URL: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/
-    Author: BootstrapMade
-    Author URL: https://bootstrapmade.com
-======================================================= -->
+
 </head>
 <body>
 <div id="wrapper">

@@ -39,7 +39,7 @@ import kr.co.unibate.bean.fboard;
 @Repository
 public interface UnibateMapper {
 	
-	//대회정보
+	//���쉶�젙蹂�
 	final String COMPETITIONINFO_LOAD="SELECT * FROM CompetitionInfo";
 	final String COMPETITIONINFO_INSERT="INSERT INTO CompetitionInfo(competition_date, competition_name, competition_local, competition_url) VALUES(#{competition_date},#{competition_name},#{competition_local},#{competition_url})";
 	final String COMPETITIONINFO_DELETE="delete from CompetitionInfo where info_code in "
@@ -66,7 +66,7 @@ public interface UnibateMapper {
 	void CompetitionDelete();
 	
 	
-	//공지사항
+	//怨듭��궗�빆
 	final String NOTICEBOARD="SELECT NOTICE_BOARD_NUM, NOTICE_SUBJECT, NOTICE_DATE, NOTICE_HITS FROM NoticeBoard";
 	final String NOTICE_PAGING="SELECT * FROM NoticeBoard ORDER BY  NOTICE_BOARD_NUM DESC LIMIT  #{start}, #{end} ";
 	final String NOTICE_DATA="SELECT * FROM NoticeBoard WHERE notice_board_num=#{notice_board_num}";
@@ -99,7 +99,7 @@ public interface UnibateMapper {
 	@Select(NOTICE_ALL)
 	int getNoticeAll();
 	
-	//주제건의
+	//二쇱젣嫄댁쓽
 	final String SUGGESTION_INSERT="INSERT INTO SuggestionBoard(suggestion_content, suggestion_subject, suggestion_hit , id, suggestion_date ) VALUES( #{suggestion_content}, #{suggestion_subject}, 0, #{id}, now())";
 	final String SUGGESTION_PAGING="SELECT * FROM SuggestionBoard ORDER BY  suggestion_board_num DESC LIMIT  #{start}, #{end} ";
 	final String SUGGESTION_ALL="SELECT COUNT(1) FROM SuggestionBoard";
@@ -167,7 +167,7 @@ public interface UnibateMapper {
 	@Delete(SUGGESTION_DELETE)
 	void deleteSuggestion(@Param("suggestion_board_num") int suggestion_board_num);
 	
-	//신고함 파트 입니다.
+	//�떊怨좏븿 �뙆�듃 �엯�땲�떎.
 	final String PROPOSAL_INSERT="INSERT INTO proposal(proposal_flag, proposal_subject, proposal_content, id, proposal_date ) VALUES( #{proposal_flag}, #{proposal_subject}, #{proposal_content}, #{id}, sysdate())";
 	
 	@Insert(PROPOSAL_INSERT)
@@ -175,7 +175,7 @@ public interface UnibateMapper {
 	
 	
 	
-	//자유게시판
+	//�옄�쑀寃뚯떆�뙋
 	
 	final String FBOARD_INSERT="INSERT INTO fBoard(FBoard_content, FBoard_subject, FBoard_hit , id, FBoard_date ,URLdata) VALUES( #{fboard_content}, #{fboard_subject}, 0, #{id}, now(), #{urldata})";
 	final String FBOARD_PAGING="SELECT * FROM fBoard ORDER BY  fboard_num DESC LIMIT  #{start}, #{end} ";
@@ -186,12 +186,12 @@ public interface UnibateMapper {
 	final String FBOARD_LIKE="UPDATE fBoard SET f_like=f_like+1 WHERE fboard_num=#{fboard_num}";
 	final String FBOARD_DLIKE="UPDATE fBoard SET f_dislike=f_dislike+1 WHERE fboard_num=#{fboard_num}";
 	
-	//좋아요 체크
+	//醫뗭븘�슂 泥댄겕
 	
 	final String F_LIKE_ACTION="INSERT INTO f_likechk(fboard_num, id) VALUES(#{fboard_num}, #{id})";
 	final String F_LIKE_COUNT="SELECT COUNT(*) FROM f_likechk WHERE fboard_num=#{fboard_num} and id=#{id}";
 	
-	//리플
+	//由ы뵆
 	
 	final String F_REPLY_IN="INSERT INTO fboard_reply(fboard_num, f_reply, id, f_reply_date) VALUES(#{fboard_num}, #{f_reply}, #{id}, now())";
 	final String GET_F_REPLY="SELECT * FROM fboard_reply WHERE fboard_num=#{fboard_num} ORDER BY f_reply_num";
@@ -264,7 +264,7 @@ public interface UnibateMapper {
 	
 	//
 	
-	//주제건의
+	//二쇱젣嫄댁쓽
 	final String QNA_INSERT="INSERT INTO qna(qna_content, qna_subject, id, qna_date ) VALUES( #{qna_content}, #{qna_subject}, #{id}, now())";
 	final String QNA_PAGING="SELECT * FROM qna ORDER BY  qna_num DESC LIMIT  #{start}, #{end} ";
 	final String QNA_ALL="SELECT COUNT(1) FROM qna";
@@ -292,7 +292,7 @@ public interface UnibateMapper {
 	@Insert(QNA_INSERT)
 	void insertQNA(QnAboard QnAboard);
 	
-	//동아리 파트
+	//�룞�븘由� �뙆�듃
 	
 	final String CLUB_INSERT="INSERT INTO club(club_name, club_introduce_text, id, club_img, club_make_date) VALUES(#{club_name}, #{club_introduce_text}, #{id}, #{club_img}, now())";
 	final String CLUB_OVERLAP="SELECT COUNT(*) FROM club WHERE id LIKE #{id} ";
@@ -366,7 +366,7 @@ public interface UnibateMapper {
 	@Update(CLUB_MEM_UP)
 	void clubMemUp(int club_num);
 	
-	//동아리 홍보
+	//�룞�븘由� �솉蹂�
 	
 	final String RECRUIT_INSERT="INSERT INTO recruiting(recruit_content, recruit_subject, recruit_hits , id, recruit_date, img ) VALUES( #{recruit_content}, #{recruit_subject}, 0, #{id}, now() ,#{img})";
 	final String RECRUIT_PAGING="SELECT * FROM recruiting ORDER BY recruit_board_num DESC LIMIT  #{start}, #{end} ";
@@ -408,8 +408,8 @@ public interface UnibateMapper {
 	
 	// final String NOTICE_PAGING="SELECT * FROM NoticeBoard ORDER BY
 	// NOTICE_BOARD_NUM DESC LIMIT #{start}, #{end} ";
-	// 게시물 역순으로 조회해 둬서 꺼내야 최근 게시물이 첫패이지에 노출됨
-	// limit은 start에서 end개수 만큼 뿌려줌
+	// 寃뚯떆臾� �뿭�닚�쑝濡� 議고쉶�빐 �뫊�꽌 爰쇰궡�빞 理쒓렐 寃뚯떆臾쇱씠 泥ロ뙣�씠吏��뿉 �끂異쒕맖
+	// limit�� start�뿉�꽌 end媛쒖닔 留뚰겮 肉뚮젮以�
 	// final String NOTICE_ALL="SELECT COUNT(1) FROM NoticeBoard";
 
 	final String Reply = "SELECT * FROM reply where ad_board_num = #{ad_board_num} and board_group_num=#{board_group_num} order by ad_like desc LIMIT  #{start}, #{end}";
@@ -446,11 +446,11 @@ public interface UnibateMapper {
 	@Update(APPOINTMENT_MANAGER)
 	void appointmentManager(ClubData clubData);
 	
-	//내동아리 인원수
+	//�궡�룞�븘由� �씤�썝�닔
 	final String My_Club_Member = "SELECT count(*) from MEMBER1 where club_num=#{my_club_num}";
-	//내 동아리 멤버들 가져오기
+	//�궡 �룞�븘由� 硫ㅻ쾭�뱾 媛��졇�삤湲�
 	final String My_Club_Member_List = "select * from (SELECT m.id, m.name, c.club_flag, m.club_num from MEMBER1 as m INNER JOIN club_mem as c where m.id=c.id order by club_num) as d where d.club_num=#{club_num}";
-	//클럽장 가져오기
+	//�겢�읇�옣 媛��졇�삤湲�
 	final String My_Club_King = "SELECT id FROM club_mem where CLUB_NUM=#{club_num} and club_flag=1";
 	
 
@@ -587,7 +587,7 @@ public interface UnibateMapper {
 	
 	
 	
-	//동아리 탈퇴
+	//�룞�븘由� �깉�눜
 	final String MY_CLUB_FLAG="SELECT CLUB_FLAG FROM club_mem WHERE ID=#{id}";
 	final String SECESSION_CLUB="DELETE FROM club_mem WHERE ID=#{id}";
 	final String CLUB_NUM_0="UPDATE MEMBER1 SET CLUB_NUM=0 WHERE ID=#{id}";
@@ -601,7 +601,7 @@ public interface UnibateMapper {
 	@Update(CLUB_NUM_0)
 	void clubNumReset(String id);
 	
-	//회원 가입 파트
+	//�쉶�썝 媛��엯 �뙆�듃
 	
 	final String SIGN_IN = "INSERT INTO MEMBER1(id,pwd,name,gender,area,school,major,email) VALUES(#{id},#{pwd},#{name},#{gender},#{area},#{school},#{major},#{email})";
 
@@ -628,20 +628,20 @@ public interface UnibateMapper {
 	void deleteMem(String id);
 
 
-	////회원가입 테이블 멤버 삽입
+	////�쉶�썝媛��엯 �뀒�씠釉� 硫ㅻ쾭 �궫�엯
 	@Insert(SIGN_IN)
 	void insertMember(User user);
 
-	////로그인 비밀번호 체크
+	////濡쒓렇�씤 鍮꾨�踰덊샇 泥댄겕
 	@Select(Login)
 	String login(@Param("id") String id);
 
-	////회원 가입 아이디 중복확인
+	////�쉶�썝 媛��엯 �븘�씠�뵒 以묐났�솗�씤
 	@Select(Id_Check)
 	String id_check(@Param("id") String id);
 
 
-	//////정보 수정 파트
+	//////�젙蹂� �닔�젙 �뙆�듃
 	@Select(CALL_INFO)
 	@Results(value={
 	@Result(property="email",column="email"),
@@ -665,73 +665,73 @@ public interface UnibateMapper {
 	
 	
 
-	//실시간 토론 주제 가져오기
+	//�떎�떆媛� �넗濡� 二쇱젣 媛��졇�삤湲�
 	final String Get_Rt_subj="select * from rt_debate where d_num=#{d_num}";
 	
 	
-	//실시간 토론 댓글 가져오기
+	//�떎�떆媛� �넗濡� �뙎湲� 媛��졇�삤湲�
 	//final String Get_Rt_Reply = "select * from rt_opinion where d_num=#{d_num}";
 	final String Get_Rt_Reply = "select a.group_num, a.opinion_num, a.d_num, a.id, a.d_opinion, a.opinion_date ,m.school from rt_opinion as a inner join MEMBER1 as m where a.id=m.id and a.d_num=#{d_num}";
 	
 
-	//실시간 토론 찬성팀 참가
+	//�떎�떆媛� �넗濡� 李ъ꽦�� 李멸�
 	final String Agree_Team = "INSERT INTO rt_opinion(group_num,d_num,id,opinion_date) values (1,#{d_num},#{id},now())";
 	
-	//실시간 토론 반대팀 참가
+	//�떎�떆媛� �넗濡� 諛섎��� 李멸�
 	final String Disagree_Team ="INSERT INTO rt_opinion(group_num,d_num,id,opinion_date) values (2,#{d_num},#{id},now())";
 	
-	//실시간 찬성 팀원수 구하기
+	//�떎�떆媛� 李ъ꽦 ���썝�닔 援ы븯湲�
 	final String Agree_Team_Count = "select count(*) from (select id from rt_opinion where group_num = 1 and d_num=1 group by id) as a ";
 	
-	//실시간 반대 팀원수 구하기
+	//�떎�떆媛� 諛섎� ���썝�닔 援ы븯湲�
 	final String Disagree_Team_Count = "select count(*) from (select id from rt_opinion where group_num = 2 and d_num=1 group by id) as a ";
 	
-	//실시간 토론 팀 참가여부 확인
+	//�떎�떆媛� �넗濡� �� 李멸��뿬遺� �솗�씤
 	final String Real_Team_Check = "select count(*) from (select id from rt_opinion where group_num=1 or group_num=2) as a where a.id=#{id}";
 	
-	//내 그룹넘버(어느 팀인지)가져오기
+	//�궡 洹몃９�꽆踰�(�뼱�뒓 ���씤吏�)媛��졇�삤湲�
 	final String My_Group_Num = "SELECT group_num from rt_opinion where id=#{id} order by opinion_date DESC limit 1";
 	
-	//의견 등록하기
+	//�쓽寃� �벑濡앺븯湲�
 	final String Insert_Op = "INSERT INTO rt_opinion(group_num,d_num,id,d_opinion,opinion_date) values(#{group_num},#{d_num},#{id},#{d_opinion},now())";
 	
-	//찬성팀 리스트 가져오기
+	//李ъ꽦�� 由ъ뒪�듃 媛��졇�삤湲�
 	final String Real_Agree_Member = "select b.id,b.name,sum(a.opinion_num) as opinion_num from rt_opinion as a join MEMBER1 as b on a.id=b.id where a.d_num=#{d_num} and a.group_num =1 group by a.id";
 	
-	//반대팀 리스트 가져오기
+	//諛섎��� 由ъ뒪�듃 媛��졇�삤湲�
 	final String Real_Disagree_Member = "select b.id,b.name,sum(a.opinion_num) as opinion_num from rt_opinion as a join MEMBER1 as b on a.id=b.id where a.d_num=#{d_num} and a.group_num =2 group by a.id";
 	
-	//팀 취소 하기 
+	//�� 痍⑥냼 �븯湲� 
 	final String Real_Team_Cancel = "delete from rt_opinion where d_num=#{d_num} and group_num=#{my_group_num} and id=#{id}";
 	
-	//실시간 좋아요 업데이트
+	//�떎�떆媛� 醫뗭븘�슂 �뾽�뜲�씠�듃
 	final String Real_Like_Up = "update rt_opinion set opinion_num = opinion_num+1 where opinion_date = (select t.opinion_date from (select opinion_date from rt_opinion where group_num=#{my_group_num} and d_num=#{d_num} group by id having id =#{id} order by opinion_date DESC limit 1)as t)";
 	
-	//실시간 팀 점수 가져오기
+	//�떎�떆媛� �� �젏�닔 媛��졇�삤湲�
 	final String Get_Score = "select sum(opinion_num) from rt_opinion where d_num=#{d_num} and group_num = #{group_num}";
 	//
 	final String DEFAULT_SCORE="select count(opinion_num) from rt_opinion where d_num=#{d_num}";
 	
 	final String GROPE_SCORE="select count(opinion_num) from rt_opinion where d_num=#{d_num} and group_num = #{group_num}";
-	//토론 결과 리스트 가져오기
+	//�넗濡� 寃곌낵 由ъ뒪�듃 媛��졇�삤湲�
 	final String Get_Rt_Result = "select * from rt_result";
 	
-	//최고의 토론 참여자수 구하기
+	//理쒓퀬�쓽 �넗濡� 李몄뿬�옄�닔 援ы븯湲�
 	final String Best_Debate_Mem = "select count(distinct id) from rt_opinion where d_num=#{d_num}";
 	
-	//최고의 토론 가져오기
+	//理쒓퀬�쓽 �넗濡� 媛��졇�삤湲�
 	final String Get_Best_Result = "select * from rt_result where d_num=#{d_num}";
 	
-	//하루에 한번 좋아요를 할 수있게
+	//�븯猷⑥뿉 �븳踰� 醫뗭븘�슂瑜� �븷 �닔�엳寃�
 	final String Insert_Temp = "Insert into temp_like values(#{id},now())";
 	
-	//좋아요 임시 테이블 아이디 체크
+	//醫뗭븘�슂 �엫�떆 �뀒�씠釉� �븘�씠�뵒 泥댄겕
 	final String Check_Temp_Like = "select count(*) from temp_like where id=#{id}";
 	
-	//좋아요 임시 테이블 삭제
+	//醫뗭븘�슂 �엫�떆 �뀒�씠釉� �궘�젣
 	final String Del_Temp_Like = "delete from temp_like";
 	
-	//임시 좋아요 날짜 가져오기
+	//�엫�떆 醫뗭븘�슂 �궇吏� 媛��졇�삤湲�
 	final String Get_Temp_Date = "select tmp_date from temp_like order by tmp_date DESC limit 1";
 	//
 	final String Get_Temp_Date_chk = "select count(tmp_date) from temp_like order by tmp_date DESC limit 1";
@@ -893,22 +893,22 @@ public interface UnibateMapper {
 	@Insert(INSERT_NOTICE)
 	void insertNotice(@Param("notice_subject") String notice_subject, @Param("notice_content") String notice_content);
 	
-<<<<<<< HEAD
+
 	final String NOTICE_DELETE="DELETE FROM NoticeBoard WHERE notice_board_num=#{notice_board_num}";
-=======
-	final String NOTICE_DELETE="DELETE FROM NOTICEBOARD WHERE notice_board_num=#{notice_board_num}";
->>>>>>> b0d034ff761fabb6b9e9e2e067957cd79ab8e3da
+
+	
+
 	
 	@Delete(NOTICE_DELETE)
 	void delNoticeBoard(String notice_board_num);
 	
-///// 관리자(실시간 토론)
+///// 愿�由ъ옄(�떎�떆媛� �넗濡�)
 	final String Insert_Rt_Debate = "Insert into rt_debate (d_subject,d_content,d_date) values (#{d_subject},#{d_content},now())";
 	
 	@Insert(Insert_Rt_Debate)
 	void Insert_Rt_Debate(@Param("d_subject") String d_subject,@Param("d_content") String d_content);
 	
-	//관리자 (토론결과)
+	//愿�由ъ옄 (�넗濡좉껐怨�)
 	final String Insert_Rt_Result = "insert into rt_result values (#{d_num},#{d_subject},#{best_mem},#{agree_score},#{disagree_score},#{start_date},#{end_date})";
 	@Insert(Insert_Rt_Result)
 	void Insert_Rt_Result(@Param("d_num") String d_num,@Param("d_subject") String d_subject,@Param("best_mem") String best_mem,
@@ -928,18 +928,18 @@ public interface UnibateMapper {
 	@Select(Get_Maxdnum_Result)
 	int Get_Maxdnum_Result();
 	
-	//최다 응원을 받음 멤버 구하기
+	//理쒕떎 �쓳�썝�쓣 諛쏆쓬 硫ㅻ쾭 援ы븯湲�
 	final String Get_Best_Mem_Id = "select id from rt_opinion where d_num = #{d_num} order by opinion_num DESC limit 1";
 	@Select(Get_Best_Mem_Id)
 	String Get_Best_Mem_Id(@Param("d_num") String d_num);
 	
-	//최다 멤버 학교 구하기
+	//理쒕떎 硫ㅻ쾭 �븰援� 援ы븯湲�
 	final String Get_Mem_School = "select school from MEMBER1 where id =#{id}";
 	@Select(Get_Mem_School)
 	String Get_Mem_School(@Param("id") String id);
 	
 	
-	//최고의 토론
+	//理쒓퀬�쓽 �넗濡�
 	final String Get_Debate_List = "select d_num,d_subject from rt_debate";
 	@Select(Get_Debate_List)
 	@Results(value = { 

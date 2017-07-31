@@ -16,22 +16,6 @@ notice_date datetime not null,
 notice_hits int default 0
 )ENGINE=InnoDB character set=utf8;
 
-create table reply(
-ad_reply_num int primary key auto_increment,
-ad_board_num int not null,
-id varchar(20) not null,
-ad_reply varchar(500) not null,
-ad_like int,
-ad_dislike int,
-reply_date datetime
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-create table ad_board_list(
-ad_board_num int primary key auto_increment,
-ad_subject varchar(50) not null,
-board_date datetime,
-board_count int
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 create table proposal(
 	proposal_num int primary key auto_increment,

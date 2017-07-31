@@ -154,13 +154,6 @@ board_content varchar(2000),
 board_date datetime,
 board_count int)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-create table rt_opinion(
-group_num int,
-opinion_num int,
-d_num int,
-id varchar(50),
-d_opinion varchar(1000),
-opinion_date datetime)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 create table rt_debate(
 d_num int primary key auto_increment,
@@ -176,11 +169,6 @@ id varchar(50),
 d_opinion varchar(1000),
 opinion_date datetime)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-create table rt_debate(
-d_num int primary key,
-d_subject varchar(500),
-d_content varchar(1000),
-d_date datetime)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 create table rt_result(
 d_num int primary key,

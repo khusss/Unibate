@@ -18,9 +18,6 @@
 <!-- Theme skin -->
 <link href="skins/default.css" rel="stylesheet" />
 
-<!-- 안녕하세요 -->
-<!-- ㅇㄹㅇㄹㅇㄹㅇㅇ -->
-
 </head>
 <body>
 <div id="wrapper">

@@ -51,7 +51,7 @@ public class comunityController {
 	public String rootpage(Model model){
 
 		
-		return "main";
+		return "redirect:/main.do";
 	}
 	
 	@RequestMapping(value="/main.do", method=RequestMethod.GET)

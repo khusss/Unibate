@@ -15,7 +15,7 @@ alert('${userDel}');
 </c:if>
 <c:remove var="userid" scope="session" />
 <script type="text/javascript">
-	location.href="/unibate/main.do"
+	location.href="main.do"
 </script>
 </body>
 </html>

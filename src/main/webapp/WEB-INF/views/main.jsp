@@ -19,6 +19,11 @@
 <link href="skins/default.css" rel="stylesheet" />
 
 
+<!-- 연습입니다. hhhddddddddddddd
+
+fdsgdfgdsfg
+fghfhg-->
+
 </head>
 <body>
 <div id="wrapper">

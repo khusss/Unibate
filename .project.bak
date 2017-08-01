@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
+<<<<<<< HEAD
+	<name>unibateProjectBeta</name>
+=======
 	<name>unibateProject</name>
+>>>>>>> b0d034ff761fabb6b9e9e2e067957cd79ab8e3da
 	<comment></comment>
 	<projects>
 	</projects>

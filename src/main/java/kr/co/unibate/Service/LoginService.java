@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import kr.co.unibate.bean.ClubData;
 import kr.co.unibate.bean.User;
+import kr.co.unibate.bean.scInfo;
 import kr.co.unibate.mapper.UnibateMapper;
 
 @Component
@@ -89,4 +90,8 @@ public class LoginService {
 	public void delNoticeBoard(String notice_board_num){
 		this.boardMapper.delNoticeBoard(notice_board_num);
 	}
+	public ArrayList<scInfo> School_Search(String sc_name1){
+		return this.boardMapper.School_Search(sc_name1);
+	}
+	
 }

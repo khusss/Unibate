@@ -34,6 +34,7 @@ import kr.co.unibate.bean.TempLike;
 import kr.co.unibate.bean.TmpBest;
 import kr.co.unibate.bean.User;
 import kr.co.unibate.bean.fboard;
+import kr.co.unibate.bean.scInfo;
 
 
 @Repository
@@ -991,4 +992,14 @@ public interface UnibateMapper {
 			@Result(property="proposal_date", column="proposal_date")
 	})
 	Proposal getProposal_view(@Param("proposal_num") int proposal_num);
+	
+	
+	final String School_Search = "SELECT * from sc_info where sc_name like CONCAT('%',#{sc_name1},'%')";
+	@Select(School_Search)
+	@Results(value={	
+			@Result(property="sc_num", column="sc_num"),
+			@Result(property="sc_name", column="sc_name"),
+			@Result(property="sc_place", column="sc_place")
+	})
+	ArrayList<scInfo> School_Search(@Param("sc_name1") String sc_name1);
 }

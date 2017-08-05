@@ -150,16 +150,27 @@ $(document).ready(function() {
 	 function whenError() {
 	  alert("Error");
 	 } 
+ var openWin;
+function sc_search(){
+	
+	window.name ="parentForm";
+	
+	openWin=window.open('sc_search_form.do',"검색창",
+			"width=500, height=200, toolbar=no, menubar=no, scrollbars=no, resizable=yes")
+	
+}
+
+function setChildValue(name){
+    document.getElementById("school").value = name;
+}
+
+
+
+
 
 </script>
 
  
-<!-- =======================================================
-    Theme Name: Moderna
-    Theme URL: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/
-    Author: BootstrapMade
-    Author URL: https://bootstrapmade.com
-======================================================= -->
 
 
 </head>
@@ -299,8 +310,8 @@ $(document).ready(function() {
             </div>
             <div class="form-group">
               <label for="school">학교</label>
-              <input type="text" name="school" id="school" class="form-control"  placeholder="학교를 입력해 주세요">
-              <div id="check_school"></div>
+              <input type="text" name="school" id="school" class="form-control"  placeholder="학교를 입력해 주세요" disabled="disabled">
+              <div id="check_school"><input type="button" value="학교 검색" class="btn btn-default" onclick="sc_search()"></div>
             </div>
             <div class="form-group">
               <label for="school">전공</label>

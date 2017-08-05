@@ -1,6 +1,7 @@
 package kr.co.unibate.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.unibate.bean.User;
+import kr.co.unibate.bean.scInfo;
 import kr.co.unibate.Service.LoginService;
 
 @Controller
@@ -376,5 +378,26 @@ public class LoginController {
 	
 		//단순 뷰만 뿌려주는부분
 	}
+	@RequestMapping(value="/sc_search_form.do",method={RequestMethod.GET,RequestMethod.POST})
+	public String sc_search_form(Model model){
+		ArrayList<scInfo> sc_info = new ArrayList();
+		
+		model.addAttribute("sc_info",sc_info);
+		return "/join/sc_search";
+	}
 	
+	@RequestMapping(value="/sc_search.do",method={RequestMethod.GET,RequestMethod.POST})
+	public String sc_search(Model model,@RequestParam("sc_name1") String sc_name1){
+		
+	
+
+	
+		System.out.println(sc_name1);
+		ArrayList<scInfo> sc_info=loginService.School_Search(sc_name1);
+		
+		System.out.println("sc_info size::"+sc_info.size());
+		
+		model.addAttribute("sc_info",sc_info);
+		return "/join/sc_search";
+	}
 }

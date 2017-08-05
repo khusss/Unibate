@@ -161,6 +161,7 @@ d_subject varchar(500),
 d_content varchar(1000),
 d_date datetime)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+drop table rt_debate
 create table rt_opinion(
 group_num int,
 opinion_num int default 0,
@@ -189,3 +190,37 @@ create table tmp_best(
 d_num int,
 best_month varchar(10),
 best_year varchar(10))ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+create table sc_info(
+sc_num int primary key,
+sc_class varchar(10),
+sc_class2 varchar(10),
+sc_place varchar(10),
+sc_code varchar(10),
+sc_name varchar(20),
+major_code int,
+major_name varchar(10),
+major_class varchar(10),
+major_class2 varchar(15),
+major_class3 varchar(15),
+class varchar(10))ENGINE=InnoDB DEFAULT CHARSET=utf8;
+drop table sc_info
+select * from sc_info
+
+create table sc_info(
+sc_num int primary key,
+sc_name varchar(10),
+sc_place varchar(10)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+insert into sc_info values(1,'인하대','인천')
+insert into sc_info values(2,'서울대','서울')
+insert into sc_info values(3,'서울여대','서울')
+insert into sc_info values(4,'inha','incheon')
+
+## csv -> mysql 한글 깨짐..
+LOAD DATA local INFILE "C:\\Users\\Administrator\\Desktop\\Unibate\\data\\school_data3.csv" 
+INTO TABLE javadb.sc_info FIELDS TERMINATED BY "," OPTIONALLY ENCLOSED BY '"' ;
+
+select * from sc_info
+SELECT sc_name from sc_info where sc_name like CONCAT('%',#{sc_name},'%');
